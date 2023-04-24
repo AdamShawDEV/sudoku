@@ -1,0 +1,19 @@
+.numPad {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.numKey {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 40px;
+  background-color: blue;
+  border-radius: 5px;
+}
+
+.numKey:hover {
+  background-color: aqua;
+}
