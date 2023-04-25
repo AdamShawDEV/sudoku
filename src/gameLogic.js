@@ -358,11 +358,13 @@ function checkBoard(gameBoard) {
   return true;
 }
 
-function createNewGame() {
-  const gameBoard = createEmptyBoard();
-  fillBoard(gameBoard);
+function createNewGame(difficulty) {
+  const completedBoard = createEmptyBoard();
+  fillBoard(completedBoard);
 
-  let attempts = 100;
+  const gameBoard = copyGameBoard(completedBoard);
+
+  let attempts = difficulty;
   counter = 1;
   while (attempts > 0) {
     let row = Math.floor(Math.random() * 9);
@@ -378,12 +380,7 @@ function createNewGame() {
     gameBoard[row][col].value = null;
     gameBoard[row][col].status = CELL_STATUS.TO_GUESS;
 
-    let gameBoardCopy = createEmptyBoard();
-    for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
-        gameBoardCopy[i][j] = { ...gameBoard[i][j] };
-      }
-    }
+    const gameBoardCopy = copyGameBoard(gameBoard);
 
     counter = 0;
     solveBoard(gameBoardCopy);
@@ -394,7 +391,17 @@ function createNewGame() {
     }
   }
 
-  return gameBoard;
+  return { gameBoard, completedBoard };
+}
+
+function copyGameBoard(gameBoard) {
+  let gameBoardCopy = createEmptyBoard();
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      gameBoardCopy[i][j] = { ...gameBoard[i][j] };
+    }
+  }
+  return gameBoardCopy;
 }
 
 export { createNewGame };

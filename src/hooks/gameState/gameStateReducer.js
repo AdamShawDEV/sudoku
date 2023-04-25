@@ -21,9 +21,13 @@ export default function gameStateReducer(state, action) {
       return {
         ...state,
         gameBoard: action.gameBoard,
+        completedBoard: action.completedBoard,
+        difficulty: action.difficulty,
         gameStatus: GAME_STATUS.PLAYING,
         loading: false,
       };
+    case types.CHANGE_STATUS:
+      return { ...state, gameStatus: action.newStatus };
 
     default:
       console.log("invalid action type");

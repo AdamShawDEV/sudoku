@@ -9,11 +9,20 @@ function addNumber(value, rowIdx, colIdx) {
   };
 }
 
-function loadState(gameBoard) {
+function loadState(gameBoard, completedBoard, difficulty) {
   return {
     type: types.LOAD_STATE,
     gameBoard,
+    completedBoard,
+    difficulty,
   };
 }
 
-export { addNumber, loadState };
+function changeStatus(newStatus) {
+  return {
+    type: types.CHANGE_STATUS,
+    newStatus,
+  };
+}
+
+export { addNumber, loadState, changeStatus };

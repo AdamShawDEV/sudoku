@@ -1,7 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import gameStateReducer from "./gameStateReducer";
-import { createNewGame } from "../../gameLogic";
-import { loadState } from "./actions";
 import { GAME_STATUS } from "../../CONSTS";
 
 const initialState = {
@@ -15,6 +13,7 @@ let initialGameState;
 try {
   initialGameState =
     JSON.parse(localStorage.getItem("sudoku_game_state")) ?? initialState;
+  initialGameState.gameStatus = GAME_STATUS.INITIAL;
 } catch (e) {
   console.log("unable to load state from local storage");
   initialGameState = initialState;
@@ -24,14 +23,6 @@ const GameStateContext = createContext(null);
 
 function GameStateProvider({ children }) {
   const [gameState, dispatch] = useReducer(gameStateReducer, initialGameState);
-
-  useEffect(() => {
-    if (!gameState.gameBoard) {
-      const gameBoard = createNewGame();
-      dispatch(loadState(gameBoard));
-    }
-    // eslint-disable-next-line
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("sudoku_game_state", JSON.stringify(gameState));
