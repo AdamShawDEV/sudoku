@@ -9,11 +9,11 @@ function addNumber(value, rowIdx, colIdx) {
   };
 }
 
-function loadBoard(gameBoard) {
+function loadState(gameBoard) {
   return {
-    type: types.LOAD_BOARD,
+    type: types.LOAD_STATE,
     gameBoard,
   };
 }
 
-export { addNumber, loadBoard };
+export { addNumber, loadState };

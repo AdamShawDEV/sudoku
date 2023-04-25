@@ -1,5 +1,5 @@
+import { GAME_STATUS } from "../../CONSTS";
 import * as types from "./actionTypes";
-import { loadBoard } from "./actions";
 
 export default function gameStateReducer(state, action) {
   const { type } = action;
@@ -17,10 +17,12 @@ export default function gameStateReducer(state, action) {
             : row
         ),
       };
-    case types.LOAD_BOARD:
+    case types.LOAD_STATE:
       return {
         ...state,
         gameBoard: action.gameBoard,
+        gameStatus: GAME_STATUS.PLAYING,
+        loading: false,
       };
 
     default:

@@ -1,2 +1,2 @@
 export const ADD_NUMBER = "ADD_NUMBER";
-export const LOAD_BOARD = "LOAD_BOARD";
+export const LOAD_STATE = "LOAD_STATE";

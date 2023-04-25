@@ -4,12 +4,14 @@ import GameBoard from "./components/GameBoard";
 import NumPad from "./components/NumPad";
 import { addNumber } from "./hooks/gameState/actions";
 import { useGameState } from "./hooks/gameState/gameStateContext";
+import Header from "./components/Header";
+import { GAME_STATUS } from "./CONSTS";
 
-const emptySelection = { rowIdx: null, rowIdx: null };
+const emptySelection = { rowIdx: null, colIdx: null };
 
 function App() {
   const [selectedCell, setSelectedCell] = useState(emptySelection);
-  const { dispatch } = useGameState();
+  const { dispatch, gameState } = useGameState();
 
   function handleNumKeyPress(value) {
     if (selectedCell.rowIdx != null && selectedCell.colIdx != null) {
@@ -28,10 +30,19 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">Sudoku</header>
+      <Header />
       <main>
-        <GameBoard setSelectedCell={selectCell} selectedCell={selectedCell} />
-        <NumPad handleNumKeyPress={handleNumKeyPress} />
+        {gameState.gameStatus === GAME_STATUS.PLAYING ? (
+          <>
+            <GameBoard
+              setSelectedCell={selectCell}
+              selectedCell={selectedCell}
+            />
+            <NumPad handleNumKeyPress={handleNumKeyPress} />
+          </>
+        ) : (
+          <div>hiya</div>
+        )}
       </main>
     </div>
   );

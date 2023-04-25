@@ -26,6 +26,8 @@ const computedStyles = {
 function GameBoard({ selectedCell, setSelectedCell }) {
   const { gameState } = useGameState();
 
+  if (!gameState.gameBoard) return null;
+
   return (
     <div className={styles.gameBoard}>
       {gameState.gameBoard.map((row, rowIdx) =>
