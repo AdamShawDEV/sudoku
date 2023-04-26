@@ -6,6 +6,9 @@ const initialState = {
   gameBoard: null,
   loading: true,
   gameStatus: GAME_STATUS.INITIAL,
+  settings: {
+    showErrors: true,
+  },
 };
 
 // load existing game from localstorage

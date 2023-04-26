@@ -1,17 +1,27 @@
 .gameBoard {
   position: relative;
-  background-color: red;
   margin: 0 auto;
 }
 
 .cell {
+  font-weight: 600;
+  color: #2fcc71ff;
   position: absolute;
-  font-size: 20px;
   border-color: black;
   border-style: solid;
   text-align: center;
+  background-color: #f6f6f6ff;
 }
 
 .cell:hover {
-  background-color: aqua;
+  background-color: #2fcc71ff;
+}
+
+.draftNumber {
+  position: absolute;
+  color: black;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 30%;
 }

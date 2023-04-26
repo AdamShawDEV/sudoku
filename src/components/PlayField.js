@@ -4,16 +4,32 @@ import GameBoard from "./GameBoard";
 import NumPad from "./NumPad";
 import { addNumber } from "../hooks/gameState/actions";
 import { useGameState } from "../hooks/gameState/gameStateContext";
+import useWindowDimensions from "../hooks/useWindowDimensions";
+import {
+  BASE_GAME_BOARD_DIAMETER,
+  BASE_PLAY_FIELD_HEIGHT,
+  HEADER_HEIGHT,
+} from "../CONSTS";
 
 const emptySelection = { rowIdx: null, colIdx: null };
 
-function PlayField({ selectCell }) {
+function PlayField() {
   const [selectedCell, setSelectedCell] = useState(emptySelection);
+  const [isDraft, setIsDraft] = useState(false);
+  const { windowDimentions } = useWindowDimensions();
   const { dispatch } = useGameState();
+
+  const scaleFactor = Math.min(
+    (windowDimentions.height - HEADER_HEIGHT) / BASE_PLAY_FIELD_HEIGHT,
+    windowDimentions.width / BASE_GAME_BOARD_DIAMETER,
+    1
+  );
 
   function handleNumKeyPress(value) {
     if (selectedCell.rowIdx != null && selectedCell.colIdx != null) {
-      dispatch(addNumber(value, selectedCell.rowIdx, selectedCell.colIdx));
+      isDraft
+        ? console.log("add a draft")
+        : dispatch(addNumber(value, selectedCell.rowIdx, selectedCell.colIdx));
     }
   }
 
@@ -25,10 +41,20 @@ function PlayField({ selectCell }) {
       return cell;
     });
   }
+
   return (
     <div className={styles.playField}>
-      <GameBoard setSelectedCell={selectCell} selectedCell={selectedCell} />
-      <NumPad handleNumKeyPress={handleNumKeyPress} />
+      <GameBoard
+        setSelectedCell={selectCell}
+        selectedCell={selectedCell}
+        scaleFactor={scaleFactor}
+      />
+      <NumPad
+        handleNumKeyPress={handleNumKeyPress}
+        scaleFactor={scaleFactor}
+        isDraft={isDraft}
+        setIsDraft={setIsDraft}
+      />
     </div>
   );
 }

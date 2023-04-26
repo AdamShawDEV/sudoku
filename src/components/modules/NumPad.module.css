@@ -1,16 +1,12 @@
 .keyPad {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px 0;
-  width: 588px;
   margin: 0 auto;
 }
 
 .buttonRow {
   display: flex;
   justify-content: center;
-  gap: 100px;
 }
 
 .keyRow {
@@ -18,26 +14,36 @@
   justify-content: space-between;
 }
 
+.button,
+.numKey {
+  user-select: none;
+  color: #39cc7fff;
+  border: 2px solid #f3f3f3ff;
+}
+
+.button:hover,
+.numKey:hover {
+  border-color: #13c45fff;
+}
+
+.button:active,
+.numKey:active {
+  background-color: #13c45fff;
+  color: #f3f3f3ff;
+}
+
+.buttonSelected {
+  border-color: #13c45fff;
+  background-color: #13c45fff;
+  color: #f3f3f3ff;
+}
+
 .button {
-  background-color: blue;
-  font-size: 40px;
-  line-height: 40px;
-  border-radius: 15px;
-  padding: 10px;
 }
 
 .numKey {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 80px;
-  font-size: 40px;
   font-weight: 700;
-  background-color: blue;
-  border-radius: 15px;
-}
-
-.numKey:hover {
-  background-color: aqua;
 }

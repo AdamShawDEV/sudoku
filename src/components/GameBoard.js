@@ -5,24 +5,14 @@ import {
   BASE_GAP,
   BASE_FONT_SIZE,
   BASE_GAME_BOARD_DIAMETER,
-  BASE_PLAY_FIELD_HEIGHT,
-  HEADER_HEIGHT,
+  CELL_STATUS,
+  BASE_DRAFT_FONT_SIZE,
 } from "../CONSTS";
-import useWindowDimensions from "../hooks/useWindowDimensions";
 
-function GameBoard({ selectedCell, setSelectedCell }) {
-  const { windowDimentions } = useWindowDimensions();
+function GameBoard({ selectedCell, setSelectedCell, scaleFactor }) {
   const { gameState } = useGameState();
 
   if (!gameState.gameBoard) return null;
-
-  const scaleFactor = Math.min(
-    windowDimentions.height / (BASE_PLAY_FIELD_HEIGHT + HEADER_HEIGHT),
-    windowDimentions.width / BASE_GAME_BOARD_DIAMETER,
-    1
-  );
-
-  console.log(scaleFactor);
 
   return (
     <div
@@ -38,11 +28,21 @@ function GameBoard({ selectedCell, setSelectedCell }) {
               rowIdx,
               colIdx,
               selectedCell,
-              scaleFactor
+              scaleFactor,
+              cell.status === CELL_STATUS.GIVEN
             )}
             onClick={() => setSelectedCell({ rowIdx, colIdx })}
           >
             {cell.value}
+            {cell.draftNumbers.map((draft, idx) => (
+              <div
+                key={draft}
+                className={styles.draftNumber}
+                style={computedStyles.draft(idx, scaleFactor)}
+              >
+                {draft}
+              </div>
+            ))}
           </div>
         ))
       )}
@@ -51,7 +51,7 @@ function GameBoard({ selectedCell, setSelectedCell }) {
 }
 
 const computedStyles = {
-  cell(rowIdx, colIdx, selectedCell, scaleFactor) {
+  cell(rowIdx, colIdx, selectedCell, scaleFactor, isGiven) {
     const width = `${BASE_CELL_DIAMETER * scaleFactor}px`;
     const height = `${BASE_CELL_DIAMETER * scaleFactor}px`;
     const top = `${
@@ -76,6 +76,10 @@ const computedStyles = {
       fontSize,
     };
 
+    if (isGiven) {
+      style.fontWeight = 700;
+      style.color = "black";
+    }
     if (rowIdx === 2 || rowIdx === 5)
       style.borderBottomWidth = `${BASE_GAP * 2 * scaleFactor}px`;
     if (colIdx === 2 || colIdx === 5)
@@ -94,6 +98,12 @@ const computedStyles = {
   gameBoard: (scaleFactor) => ({
     width: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
     height: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
+  }),
+  draft: (idx, scaleFactor) => ({
+    left: `${33 * (idx % 3)}%`,
+    top: `${33 * Math.floor(idx / 3)}%`,
+    fontSize: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
+    lineHeight: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
   }),
 };
 
