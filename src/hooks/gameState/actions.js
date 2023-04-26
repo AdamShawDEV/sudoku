@@ -25,4 +25,13 @@ function changeStatus(newStatus) {
   };
 }
 
-export { addNumber, loadState, changeStatus };
+function addDraft(value, rowIdx, colIdx) {
+  return {
+    type: types.ADD_DRAFT,
+    value,
+    rowIdx,
+    colIdx,
+  };
+}
+
+export { addNumber, loadState, changeStatus, addDraft };

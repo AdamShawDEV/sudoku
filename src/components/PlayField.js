@@ -2,7 +2,7 @@ import styles from "./modules/PlayField.module.css";
 import { useState } from "react";
 import GameBoard from "./GameBoard";
 import NumPad from "./NumPad";
-import { addNumber } from "../hooks/gameState/actions";
+import { addDraft, addNumber } from "../hooks/gameState/actions";
 import { useGameState } from "../hooks/gameState/gameStateContext";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import {
@@ -28,7 +28,7 @@ function PlayField() {
   function handleNumKeyPress(value) {
     if (selectedCell.rowIdx != null && selectedCell.colIdx != null) {
       isDraft
-        ? console.log("add a draft")
+        ? dispatch(addDraft(value, selectedCell.rowIdx, selectedCell.colIdx))
         : dispatch(addNumber(value, selectedCell.rowIdx, selectedCell.colIdx));
     }
   }

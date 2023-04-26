@@ -14,6 +14,8 @@ function GameBoard({ selectedCell, setSelectedCell, scaleFactor }) {
 
   if (!gameState.gameBoard) return null;
 
+  console.log(gameState);
+
   return (
     <div
       className={styles.gameBoard}
@@ -29,20 +31,25 @@ function GameBoard({ selectedCell, setSelectedCell, scaleFactor }) {
               colIdx,
               selectedCell,
               scaleFactor,
-              cell.status === CELL_STATUS.GIVEN
+              cell.status,
+              gameState.settings.showErrors
             )}
             onClick={() => setSelectedCell({ rowIdx, colIdx })}
           >
             {cell.value}
-            {cell.draftNumbers.map((draft, idx) => (
-              <div
-                key={draft}
-                className={styles.draftNumber}
-                style={computedStyles.draft(idx, scaleFactor)}
-              >
-                {draft}
-              </div>
-            ))}
+            {Array.from({ length: 9 }, (__, idx) => {
+              if (cell.draftNumbers.includes(idx + 1)) {
+                return (
+                  <div
+                    key={idx}
+                    className={styles.draftNumber}
+                    style={computedStyles.draft(idx, scaleFactor)}
+                  >
+                    {idx + 1}
+                  </div>
+                );
+              }
+            })}
           </div>
         ))
       )}
@@ -51,7 +58,7 @@ function GameBoard({ selectedCell, setSelectedCell, scaleFactor }) {
 }
 
 const computedStyles = {
-  cell(rowIdx, colIdx, selectedCell, scaleFactor, isGiven) {
+  cell(rowIdx, colIdx, selectedCell, scaleFactor, cellStatus, showErrors) {
     const width = `${BASE_CELL_DIAMETER * scaleFactor}px`;
     const height = `${BASE_CELL_DIAMETER * scaleFactor}px`;
     const top = `${
@@ -76,10 +83,13 @@ const computedStyles = {
       fontSize,
     };
 
-    if (isGiven) {
+    if (cellStatus === CELL_STATUS.GIVEN) {
       style.fontWeight = 700;
       style.color = "black";
+    } else if (cellStatus === CELL_STATUS.WRONG_GUESS && showErrors) {
+      style.color = "red";
     }
+
     if (rowIdx === 2 || rowIdx === 5)
       style.borderBottomWidth = `${BASE_GAP * 2 * scaleFactor}px`;
     if (colIdx === 2 || colIdx === 5)
