@@ -15,8 +15,6 @@ export default function gameStateReducer(state, action) {
         action.value ===
         state.completedBoard[action.rowIdx][action.colIdx].value;
 
-      console.log(isCorrect);
-
       return {
         ...state,
         gameBoard: state.gameBoard.map((row, rowIdx) =>

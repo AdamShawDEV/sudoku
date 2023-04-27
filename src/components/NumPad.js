@@ -9,7 +9,13 @@ import {
   BASE_PADDING,
 } from "../CONSTS";
 
-function NumPad({ handleNumKeyPress, scaleFactor, isDraft, setIsDraft }) {
+function NumPad({
+  handleNumKeyPress,
+  scaleFactor,
+  isDraft,
+  setIsDraft,
+  selectedNumberButton,
+}) {
   return (
     <div className={styles.keyPad} style={computedStyles.keyPad(scaleFactor)}>
       <div
@@ -35,7 +41,9 @@ function NumPad({ handleNumKeyPress, scaleFactor, isDraft, setIsDraft }) {
         {Array.from({ length: 9 }, (__, idx) => (
           <div
             key={idx}
-            className={styles.numKey}
+            className={`${styles.numKey} ${
+              selectedNumberButton === idx + 1 ? styles.buttonSelected : {}
+            }`}
             style={computedStyles.numKey(scaleFactor)}
             onClick={() => handleNumKeyPress(idx + 1)}
           >
@@ -50,9 +58,8 @@ function NumPad({ handleNumKeyPress, scaleFactor, isDraft, setIsDraft }) {
 const computedStyles = {
   keyPad: (scaleFactor) => ({
     gap: `${BASE_PADDING * scaleFactor}px`,
-    padding: `${BASE_PADDING * scaleFactor}px`,
+    paddingTop: `${BASE_PADDING * scaleFactor}px`,
     width: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
-    // height: `${170 * scaleFactor}px`,
   }),
   buttonRow: (scaleFactor) => ({
     gap: `${BASE_BUTTON_GAP * scaleFactor}px`,

@@ -19,6 +19,7 @@ const emptySelection = { rowIdx: null, colIdx: null };
 function PlayField() {
   const [selectedCell, setSelectedCell] = useState(emptySelection);
   const [isDraft, setIsDraft] = useState(false);
+  const [selectedNumberButton, setSelectedNumberButton] = useState(null);
   const { windowDimentions } = useWindowDimensions();
   const { dispatch, gameState } = useGameState();
 
@@ -27,22 +28,33 @@ function PlayField() {
       isDraft
         ? dispatch(addDraft(value, selectedCell.rowIdx, selectedCell.colIdx))
         : dispatch(addNumber(value, selectedCell.rowIdx, selectedCell.colIdx));
+      setSelectedCell(emptySelection);
+    } else {
+      setSelectedNumberButton((curr) => {
+        if (curr === value) return null;
+        else return value;
+      });
     }
-    setSelectedCell(emptySelection);
   }
 
   function selectCell(cell) {
-    setSelectedCell((curr) => {
-      if (curr.rowIdx === cell.rowIdx && curr.colIdx === cell.colIdx)
-        return emptySelection;
+    if (selectedNumberButton) {
+      isDraft
+        ? dispatch(addDraft(selectedNumberButton, cell.rowIdx, cell.colIdx))
+        : dispatch(addNumber(selectedNumberButton, cell.rowIdx, cell.colIdx));
+    } else {
+      setSelectedCell((curr) => {
+        if (curr.rowIdx === cell.rowIdx && curr.colIdx === cell.colIdx)
+          return emptySelection;
 
-      return cell;
-    });
+        return cell;
+      });
+    }
   }
 
   const scaleFactor = Math.min(
     (windowDimentions.height - HEADER_HEIGHT) / BASE_PLAY_FIELD_HEIGHT,
-    windowDimentions.width / BASE_GAME_BOARD_DIAMETER,
+    windowDimentions.width / (BASE_GAME_BOARD_DIAMETER + 20),
     1
   );
 
@@ -50,6 +62,7 @@ function PlayField() {
     <>
       <div className={styles.playField}>
         <GameBoard
+          selectedNumberButton={selectedNumberButton}
           setSelectedCell={selectCell}
           selectedCell={selectedCell}
           scaleFactor={scaleFactor}
@@ -59,6 +72,7 @@ function PlayField() {
           scaleFactor={scaleFactor}
           isDraft={isDraft}
           setIsDraft={setIsDraft}
+          selectedNumberButton={selectedNumberButton}
         />
       </div>
       {gameState.gameStatus === GAME_STATUS.WON && (

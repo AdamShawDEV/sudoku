@@ -1,0 +1,36 @@
+.cell {
+  user-select: none;
+  font-weight: 600;
+  color: #979797ff;
+  position: absolute;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+  background-color: #f6f6f6ff;
+  animation: zoomIn 0.3s linear;
+  animation-fill-mode: both;
+}
+
+.cell:hover {
+  background-color: #2fcc71ff !important;
+}
+
+.draftNumber {
+  position: absolute;
+  color: black;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 30%;
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(10%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(100%);
+  }
+}
