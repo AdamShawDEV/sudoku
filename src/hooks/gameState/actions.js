@@ -34,4 +34,10 @@ function addDraft(value, rowIdx, colIdx) {
   };
 }
 
-export { addNumber, loadState, changeStatus, addDraft };
+function resetGame() {
+  return {
+    type: types.RESET_GAME,
+  };
+}
+
+export { addNumber, loadState, changeStatus, addDraft, resetGame };

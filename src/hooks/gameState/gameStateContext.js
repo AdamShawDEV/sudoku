@@ -6,6 +6,7 @@ const initialState = {
   gameBoard: null,
   loading: true,
   gameStatus: GAME_STATUS.INITIAL,
+  perfectGame: true,
   settings: {
     showErrors: true,
   },

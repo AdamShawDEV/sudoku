@@ -1,37 +1,42 @@
-import styles from "./modules/GameBoard.module.css";
-import { useGameState } from "../hooks/gameState/gameStateContext";
-import {
-  BASE_CELL_DIAMETER,
-  BASE_GAP,
-  BASE_FONT_SIZE,
-  BASE_GAME_BOARD_DIAMETER,
-  CELL_STATUS,
-  BASE_DRAFT_FONT_SIZE,
-} from "../CONSTS";
-import Cell from "./Cell";
+import styles from "./modules/Cell.module.css";
 
-function GameBoard({ selectedCell, setSelectedCell, scaleFactor }) {
-  const { gameState } = useGameState();
-
+function Cell({
+  rowIdx,
+  colIdx,
+  selectedCell,
+  scaleFactor,
+  cellStatus,
+  showErrors,
+  draftNumbers,
+  value,
+}) {
   return (
     <div
-      className={styles.gameBoard}
-      style={computedStyles.gameBoard(scaleFactor)}
-    >
-      {gameState.gameBoard.map((row, rowIdx) =>
-        row.map((cell, colIdx) => (
-          <Cell
-            rowIdx={rowIdx}
-            colIdx={colIdx}
-            selectedCell={selectedCell}
-            scaleFactor={scaleFactor}
-            cellStatus={cell.status}
-            showErrors={gameState.settings.showErrors}
-            draftNumbers={cell.draftNumber}
-            value={cell.value}
-          />
-        ))
+      className={styles.cell}
+      style={computedStyles.cell(
+        rowIdx,
+        colIdx,
+        selectedCell,
+        scaleFactor,
+        cellStatus,
+        showErrors
       )}
+      onClick={() => setSelectedCell({ rowIdx, colIdx })}
+    >
+      {value}
+      {Array.from({ length: 9 }, (__, idx) => {
+        if (draftNumbers.includes(idx + 1)) {
+          return (
+            <div
+              key={idx}
+              className={styles.draftNumber}
+              style={computedStyles.draft(idx, scaleFactor)}
+            >
+              {idx + 1}
+            </div>
+          );
+        }
+      })}
     </div>
   );
 }
@@ -96,4 +101,4 @@ const computedStyles = {
   }),
 };
 
-export default GameBoard;
+export default Cell;

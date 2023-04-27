@@ -1,6 +1,5 @@
 import { CELL_STATUS, GAME_STATUS } from "../../CONSTS";
 import * as types from "./actionTypes";
-import { checkCell } from "../../gameLogic";
 
 export default function gameStateReducer(state, action) {
   const { type } = action;
@@ -13,8 +12,10 @@ export default function gameStateReducer(state, action) {
         return state;
 
       const isCorrect =
-        state.gameBoard[action.rowIdx][action.colIdx].value ===
+        action.value ===
         state.completedBoard[action.rowIdx][action.colIdx].value;
+
+      console.log(isCorrect);
 
       return {
         ...state,
@@ -36,6 +37,7 @@ export default function gameStateReducer(state, action) {
               )
             : row
         ),
+        perfectGame: state.perfectGame ? isCorrect : state.perfectGame,
       };
     case types.LOAD_STATE:
       return {
@@ -43,6 +45,7 @@ export default function gameStateReducer(state, action) {
         gameBoard: action.gameBoard,
         completedBoard: action.completedBoard,
         difficulty: action.difficulty,
+        perfectGame: true,
         gameStatus: GAME_STATUS.PLAYING,
         loading: false,
       };
@@ -73,10 +76,15 @@ export default function gameStateReducer(state, action) {
             : row
         ),
       };
-
-      return state;
-      break;
-
+    case types.RESET_GAME:
+      return {
+        ...state,
+        gameBoard: null,
+        completedBoard: null,
+        difficulty: null,
+        perfectGame: true,
+        gameStatus: GAME_STATUS.INITIAL,
+      };
     default:
       console.log("invalid action type");
       return state;

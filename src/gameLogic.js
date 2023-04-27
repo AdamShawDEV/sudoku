@@ -168,7 +168,7 @@ function solveBoard(gameBoard) {
           gameBoard[row][col].value = value;
           gameBoard[row][col].status = CELL_STATUS.GIVEN;
 
-          if (checkBoard(gameBoard)) {
+          if (checkBoardFull(gameBoard)) {
             counter += 1;
             break;
           } else {
@@ -201,7 +201,7 @@ function fillBoard(gameBoard) {
           gameBoard[row][col].value = value;
           gameBoard[row][col].status = CELL_STATUS.GIVEN;
 
-          if (checkBoard(gameBoard)) {
+          if (checkBoardFull(gameBoard)) {
             return true;
           } else {
             if (fillBoard(gameBoard)) {
@@ -230,7 +230,7 @@ function shuffle(array) {
   return array;
 }
 
-function checkBoard(gameBoard) {
+function checkBoardFull(gameBoard) {
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
       if (!gameBoard[row][col].value) {
@@ -287,4 +287,14 @@ function copyGameBoard(gameBoard) {
   return gameBoardCopy;
 }
 
-export { createNewGame, checkCell };
+function checkBoard(gameBoard, completeBoard) {
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      if (gameBoard[row][col].value !== completeBoard[row][col].value)
+        return false;
+    }
+  }
+  return true;
+}
+
+export { createNewGame, checkBoard };
