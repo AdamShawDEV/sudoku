@@ -37,7 +37,7 @@ export default function gameStateReducer(state, action) {
         ),
         perfectGame: state.perfectGame ? isCorrect : state.perfectGame,
       };
-    case types.LOAD_STATE:
+    case types.START_GAME:
       return {
         ...state,
         gameBoard: action.gameBoard,

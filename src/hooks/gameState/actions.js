@@ -9,9 +9,9 @@ function addNumber(value, rowIdx, colIdx) {
   };
 }
 
-function loadState(gameBoard, completedBoard, difficulty) {
+function startGame(gameBoard, completedBoard, difficulty) {
   return {
-    type: types.LOAD_STATE,
+    type: types.START_GAME,
     gameBoard,
     completedBoard,
     difficulty,
@@ -54,7 +54,7 @@ function changeSettings(newSettings) {
 
 export {
   addNumber,
-  loadState,
+  startGame,
   changeStatus,
   addDraft,
   resetGame,

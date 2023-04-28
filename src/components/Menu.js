@@ -1,6 +1,6 @@
 import styles from "./modules/Menu.module.css";
 import { useGameState } from "../hooks/gameState/gameStateContext";
-import { loadState, changeStatus } from "../hooks/gameState/actions";
+import { startGame, changeStatus } from "../hooks/gameState/actions";
 import { createNewGame } from "../gameLogic";
 import { DIFFICULTY, GAME_STATUS } from "../CONSTS";
 import MenuButton from "./MenuButton";
@@ -13,7 +13,7 @@ function Menu() {
 
     const { gameBoard, completedBoard } = createNewGame(difficulty);
 
-    dispatch(loadState(gameBoard, completedBoard, difficulty));
+    dispatch(startGame(gameBoard, completedBoard, difficulty));
   }
 
   function handleContinue() {
