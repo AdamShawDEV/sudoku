@@ -22,7 +22,11 @@ function Menu() {
 
   return (
     <div className={styles.menuContainer}>
-      <h1 className={styles.heading}>sudoku</h1>
+      <img
+        src={`${process.env.PUBLIC_URL}/logo.png`}
+        alt="logo"
+        height="150px"
+      />
       {gameState.gameBoard && (
         <MenuButton
           className={styles.menuButton}
