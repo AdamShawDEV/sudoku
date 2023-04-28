@@ -39,5 +39,10 @@ function resetGame() {
     type: types.RESET_GAME,
   };
 }
+function gameWon() {
+  return {
+    type: types.GAME_WON,
+  };
+}
 
-export { addNumber, loadState, changeStatus, addDraft, resetGame };
+export { addNumber, loadState, changeStatus, addDraft, resetGame, gameWon };

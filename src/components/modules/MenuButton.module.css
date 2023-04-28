@@ -1,0 +1,34 @@
+.menuButton {
+  min-width: 15rem;
+  padding: 0.8rem;
+  margin-bottom: 0.4rem;
+  border-radius: 2rem;
+  border: 1px solid #fff;
+  background-color: #282c34;
+  color: #fff;
+}
+
+.menuButton:hover {
+  color: #282c34;
+  background-color: #fff;
+}
+
+.heroButton {
+  min-width: 15rem;
+  padding: 0.8rem;
+  margin-bottom: 0.4rem;
+  border-radius: 2rem;
+  border: 1px solid #2ecc71ff;
+  background-color: #2ecc71ff;
+  color: #282c34;
+}
+
+.heroButton:hover {
+  color: #2ecc71ff;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.menuButton:active,
+.heroButton:active {
+  filter: brightness(60%);
+}

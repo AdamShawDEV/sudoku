@@ -46,6 +46,7 @@ export default function gameStateReducer(state, action) {
         perfectGame: true,
         gameStatus: GAME_STATUS.PLAYING,
         loading: false,
+        stats: { ...state.stats, gamesPlayed: state.stats.gamesPlayed + 1 },
       };
     case types.CHANGE_STATUS:
       return { ...state, gameStatus: action.newStatus };
@@ -83,6 +84,24 @@ export default function gameStateReducer(state, action) {
         perfectGame: true,
         gameStatus: GAME_STATUS.INITIAL,
       };
+    case types.GAME_WON:
+      return {
+        ...state,
+        gameStatus: GAME_STATUS.WON,
+        stats: {
+          ...state.stats,
+          gamesWon: state.stats.gamesWon + 1,
+          perfectGames: state.perfectGame
+            ? state.stats.perfectGames + 1
+            : state.stats.perfectGames,
+          currentStreak: state.perfectGame ? state.stats.currentStreak + 1 : 0,
+          longestStreak:
+            state.stats.currentStreak + 1 > state.stats.longestStreak
+              ? state.stats.currentStreak + 1
+              : state.stats.longestStreak,
+        },
+      };
+
     default:
       console.log("invalid action type");
       return state;

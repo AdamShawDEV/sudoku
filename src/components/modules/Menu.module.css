@@ -7,19 +7,6 @@
   background-color: #282c34;
 }
 
-.menuButton {
-  min-width: 15rem;
-  padding: 0.8rem;
-  margin-bottom: 0.4rem;
-  border-radius: 2rem;
-  border: 1px solid #fff;
-}
-
-.menuButton:hover {
-  color: #fff;
-  background-color: #282c34;
-}
-
 .heading {
   color: #fff;
 }

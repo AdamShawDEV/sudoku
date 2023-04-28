@@ -10,6 +10,13 @@ const initialState = {
   settings: {
     showErrors: true,
   },
+  stats: {
+    gamesPlayed: 0,
+    gamesWon: 0,
+    perfectGames: 0,
+    currentStreak: 0,
+    longestStreak: 0,
+  },
 };
 
 // load existing game from localstorage
@@ -17,7 +24,8 @@ let initialGameState;
 try {
   initialGameState =
     JSON.parse(localStorage.getItem("sudoku_game_state")) ?? initialState;
-  initialGameState.gameStatus = GAME_STATUS.INITIAL;
+  if (initialGameState.gameStatus !== GAME_STATUS.WON)
+    initialGameState.gameStatus = GAME_STATUS.INITIAL;
 } catch (e) {
   console.log("unable to load state from local storage");
   initialGameState = initialState;

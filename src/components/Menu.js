@@ -3,6 +3,7 @@ import { useGameState } from "../hooks/gameState/gameStateContext";
 import { loadState, changeStatus } from "../hooks/gameState/actions";
 import { createNewGame } from "../gameLogic";
 import { DIFFICULTY, GAME_STATUS } from "../CONSTS";
+import MenuButton from "./MenuButton";
 
 function Menu() {
   const { dispatch, gameState } = useGameState();
@@ -23,32 +24,37 @@ function Menu() {
     <div className={styles.menuContainer}>
       <h1 className={styles.heading}>sudoku</h1>
       {gameState.gameBoard && (
-        <button className={styles.menuButton} onClick={handleContinue}>
+        <MenuButton
+          className={styles.menuButton}
+          onClick={handleContinue}
+          type="hero"
+        >
           continue
-        </button>
+        </MenuButton>
       )}
-      <span className={styles.subHeading}>start new game:</span>
-      <button
+      <h3 className={styles.subHeading}>start a new game:</h3>
+      <MenuButton
         id={DIFFICULTY.EASY}
         className={styles.menuButton}
         onClick={(e) => handleStartNewGame(e)}
       >
+        {" "}
         easy
-      </button>
-      <button
+      </MenuButton>
+      <MenuButton
         id={DIFFICULTY.MEDIUM}
         className={styles.menuButton}
         onClick={(e) => handleStartNewGame(e)}
       >
         medium
-      </button>
-      <button
+      </MenuButton>
+      <MenuButton
         id={DIFFICULTY.HARD}
         className={styles.menuButton}
         onClick={(e) => handleStartNewGame(e)}
       >
         hard
-      </button>
+      </MenuButton>
     </div>
   );
 }
