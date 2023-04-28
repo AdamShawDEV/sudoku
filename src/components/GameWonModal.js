@@ -1,7 +1,7 @@
 import styles from "./modules/GameWonModal.module.css";
 import Modal from "./Modal";
 import { useGameState } from "../hooks/gameState/gameStateContext";
-import MenuButton from "./MenuButton";
+import Button from "./Button";
 
 function GameWonModal({ handleClose }) {
   const { gameState } = useGameState();
@@ -38,9 +38,7 @@ function GameWonModal({ handleClose }) {
           <div className={styles.stat}>{longestStreak}</div>
         </div>
       </div>
-      <MenuButton type="hero" onClick={handleClose}>
-        close
-      </MenuButton>
+      <Button onClick={handleClose}>close</Button>
     </Modal>
   );
 }

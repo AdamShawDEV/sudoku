@@ -102,6 +102,12 @@ export default function gameStateReducer(state, action) {
         },
       };
 
+    case types.CHANGE_SETTINGS:
+      return {
+        ...state,
+        settings: { ...state.settings, ...action.newSettings },
+      };
+
     default:
       console.log("invalid action type");
       return state;

@@ -45,4 +45,19 @@ function gameWon() {
   };
 }
 
-export { addNumber, loadState, changeStatus, addDraft, resetGame, gameWon };
+function changeSettings(newSettings) {
+  return {
+    type: types.CHANGE_SETTINGS,
+    newSettings,
+  };
+}
+
+export {
+  addNumber,
+  loadState,
+  changeStatus,
+  addDraft,
+  resetGame,
+  gameWon,
+  changeSettings,
+};
