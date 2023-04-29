@@ -17,6 +17,12 @@ export const DIFFICULTY = {
   HARD: 100,
 };
 
+export const emptyCell = {
+  value: null,
+  status: null,
+  draftNumbers: [],
+};
+
 export const HEADER_HEIGHT = 40;
 
 export const BASE_CELL_DIAMETER = 60;

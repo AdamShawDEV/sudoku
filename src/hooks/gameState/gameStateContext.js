@@ -7,6 +7,7 @@ const initialState = {
   loading: true,
   gameStatus: GAME_STATUS.INITIAL,
   perfectGame: true,
+  moves: [],
   settings: {
     showErrors: true,
   },

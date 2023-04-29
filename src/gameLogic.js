@@ -1,12 +1,6 @@
-import { CELL_STATUS } from "./CONSTS";
+import { CELL_STATUS, emptyCell } from "./CONSTS";
 
 let counter;
-
-const emptyCell = {
-  value: null,
-  status: null,
-  draftNumbers: [],
-};
 
 function createEmptyBoard() {
   const initailGameBoard = Array(9)

@@ -52,6 +52,12 @@ function changeSettings(newSettings) {
   };
 }
 
+function undo() {
+  return {
+    type: types.UNDO,
+  }
+}
+
 export {
   addNumber,
   startGame,
@@ -60,4 +66,5 @@ export {
   resetGame,
   gameWon,
   changeSettings,
+  undo,
 };

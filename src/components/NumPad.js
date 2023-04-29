@@ -8,6 +8,8 @@ import {
   BASE_KEY_WIDTH,
   BASE_PADDING,
 } from "../CONSTS";
+import { useGameState } from "../hooks/gameState/gameStateContext";
+import { undo } from "../hooks/gameState/actions";
 
 function NumPad({
   handleNumKeyPress,
@@ -16,6 +18,8 @@ function NumPad({
   setIsDraft,
   selectedNumberButton,
 }) {
+  const {gameState, dispatch} = useGameState();
+
   return (
     <div className={styles.keyPad} style={computedStyles.keyPad(scaleFactor)}>
       <div
@@ -23,8 +27,9 @@ function NumPad({
         style={computedStyles.buttonRow(scaleFactor)}
       >
         <div
-          className={styles.button}
+          className={`${!gameState.moves.length ? styles.buttonDisabled : styles.button}`}
           style={computedStyles.button(scaleFactor)}
+          onClick={() => dispatch(undo())}
         >
           undo
         </div>

@@ -2,7 +2,7 @@ import styles from "./modules/PlayField.module.css";
 import { useState } from "react";
 import GameBoard from "./GameBoard";
 import NumPad from "./NumPad";
-import { addDraft, addNumber, loadState } from "../hooks/gameState/actions";
+import { addDraft, addNumber } from "../hooks/gameState/actions";
 import { useGameState } from "../hooks/gameState/gameStateContext";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import {

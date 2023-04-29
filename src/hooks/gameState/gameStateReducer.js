@@ -15,8 +15,11 @@ export default function gameStateReducer(state, action) {
         action.value ===
         state.completedBoard[action.rowIdx][action.colIdx].value;
 
+      const backup = {...state.gameBoard[action.rowIdx][action.colIdx]};
+
       return {
         ...state,
+        moves: [...state.moves, {...action, backup}],
         gameBoard: state.gameBoard.map((row, rowIdx) =>
           rowIdx === action.rowIdx
             ? row.map((cell, colIdx) =>
@@ -43,6 +46,7 @@ export default function gameStateReducer(state, action) {
         gameBoard: action.gameBoard,
         completedBoard: action.completedBoard,
         difficulty: action.difficulty,
+        moves: [],
         perfectGame: true,
         gameStatus: GAME_STATUS.PLAYING,
         loading: false,
@@ -50,7 +54,7 @@ export default function gameStateReducer(state, action) {
       };
     case types.CHANGE_STATUS:
       return { ...state, gameStatus: action.newStatus };
-    case types.ADD_DRAFT:
+    case types.ADD_DRAFT: {
       const { value, rowIdx, colIdx } = action;
       if (
         state.gameBoard[rowIdx][colIdx].value ||
@@ -58,8 +62,11 @@ export default function gameStateReducer(state, action) {
       )
         return state;
 
+        const backup = {...state.gameBoard[rowIdx][colIdx]};
+
       return {
         ...state,
+        moves: [...state.moves, {...action, backup}],
         gameBoard: state.gameBoard.map((row, rIdx) =>
           rIdx === rowIdx
             ? row.map((cell, cIdx) =>
@@ -74,11 +81,12 @@ export default function gameStateReducer(state, action) {
               )
             : row
         ),
-      };
+      }};
     case types.RESET_GAME:
       return {
         ...state,
         gameBoard: null,
+        moves: [],
         completedBoard: null,
         difficulty: null,
         perfectGame: true,
@@ -107,6 +115,28 @@ export default function gameStateReducer(state, action) {
         ...state,
         settings: { ...state.settings, ...action.newSettings },
       };
+    case types.UNDO:
+      if (!state.moves.length) return state;
+      
+      const toUndo = state.moves[state.moves.length - 1];
+      console.log(toUndo);
+
+      return {
+        ...state,
+        moves: [...state.moves.slice(0, state.moves.length - 1)],
+        gameBoard: state.gameBoard.map((row, rIdx) =>
+          rIdx === toUndo.rowIdx
+            ? row.map((cell, cIdx) =>
+                cIdx === toUndo.colIdx
+                  ? {
+                      ...toUndo.backup,
+                    }
+                  : cell
+              )
+            : row
+        ),
+      };
+      
 
     default:
       console.log("invalid action type");
