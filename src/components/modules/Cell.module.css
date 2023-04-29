@@ -1,11 +1,13 @@
 .cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   user-select: none;
   font-weight: 600;
   color: #979797ff;
   position: absolute;
   border-color: black;
   border-style: solid;
-  text-align: center;
   background-color: #f6f6f6ff;
   animation: zoomIn 0.3s linear;
   animation-fill-mode: both;
@@ -17,6 +19,7 @@
 
 .draftNumber {
   position: absolute;
+  text-align: center;
   color: black;
   top: 0;
   left: 0;

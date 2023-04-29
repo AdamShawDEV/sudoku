@@ -1,6 +1,6 @@
 import styles from "./modules/GameBoard.module.css";
 import { useGameState } from "../hooks/gameState/gameStateContext";
-import { computedStyles } from "../CONSTS";
+import { BASE_GAME_BOARD_DIAMETER } from "../CONSTS";
 import Cell from "./Cell";
 
 function GameBoard({
@@ -38,3 +38,10 @@ function GameBoard({
 }
 
 export default GameBoard;
+
+const computedStyles = {
+  gameBoard: (scaleFactor) => ({
+    width: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
+    height: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
+  }),
+};
