@@ -5,18 +5,22 @@ export default function gameStateReducer(state, action) {
   const { type } = action;
   switch (type) {
     case types.ADD_NUMBER:
+      // if given number ignore
       if (
         state.gameBoard[action.rowIdx][action.colIdx].status ===
         CELL_STATUS.GIVEN
       )
         return state;
 
+      // check if is the correct number
       const isCorrect =
         action.value ===
         state.completedBoard[action.rowIdx][action.colIdx].value;
 
+      // store backuo of cell for undo
       const backup = {...state.gameBoard[action.rowIdx][action.colIdx]};
 
+      // insert new value into the game board
       return {
         ...state,
         moves: [...state.moves, {...action, backup}],
@@ -41,6 +45,7 @@ export default function gameStateReducer(state, action) {
         perfectGame: state.perfectGame ? isCorrect : state.perfectGame,
       };
     case types.START_GAME:
+      // initialize new game with given game board and answer board
       return {
         ...state,
         gameBoard: action.gameBoard,
@@ -53,17 +58,21 @@ export default function gameStateReducer(state, action) {
         stats: { ...state.stats, gamesPlayed: state.stats.gamesPlayed + 1 },
       };
     case types.CHANGE_STATUS:
+      // change the status of the game
       return { ...state, gameStatus: action.newStatus };
     case types.ADD_DRAFT: {
       const { value, rowIdx, colIdx } = action;
+      // toggle draft value
       if (
         state.gameBoard[rowIdx][colIdx].value ||
         state.gameBoard[rowIdx][colIdx].status !== CELL_STATUS.TO_GUESS
       )
         return state;
 
-        const backup = {...state.gameBoard[rowIdx][colIdx]};
+      // backup cell state for undo
+      const backup = {...state.gameBoard[rowIdx][colIdx]};
 
+      // update gameboard with new value
       return {
         ...state,
         moves: [...state.moves, {...action, backup}],
@@ -83,6 +92,7 @@ export default function gameStateReducer(state, action) {
         ),
       }};
     case types.RESET_GAME:
+      // reset the gamestate excluding the stetting and stats
       return {
         ...state,
         gameBoard: null,
@@ -93,6 +103,7 @@ export default function gameStateReducer(state, action) {
         gameStatus: GAME_STATUS.INITIAL,
       };
     case types.GAME_WON:
+      // register a won game
       return {
         ...state,
         gameStatus: GAME_STATUS.WON,
@@ -111,11 +122,13 @@ export default function gameStateReducer(state, action) {
       };
 
     case types.CHANGE_SETTINGS:
+      // save setting changed
       return {
         ...state,
         settings: { ...state.settings, ...action.newSettings },
       };
     case types.UNDO:
+      // undo last move
       if (!state.moves.length) return state;
       
       const toUndo = state.moves[state.moves.length - 1];

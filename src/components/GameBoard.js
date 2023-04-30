@@ -41,6 +41,7 @@ export default GameBoard;
 
 const computedStyles = {
   gameBoard: (scaleFactor) => ({
+    // set width and height of the game board base on the window size
     width: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
     height: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
   }),

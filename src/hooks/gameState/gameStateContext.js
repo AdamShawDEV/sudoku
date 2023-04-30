@@ -25,6 +25,7 @@ let initialGameState;
 try {
   initialGameState =
     JSON.parse(localStorage.getItem("sudoku_game_state")) ?? initialState;
+  // if game won display won modal else display the menu
   if (initialGameState.gameStatus !== GAME_STATUS.WON)
     initialGameState.gameStatus = GAME_STATUS.INITIAL;
 } catch (e) {
@@ -37,6 +38,7 @@ const GameStateContext = createContext(null);
 function GameStateProvider({ children }) {
   const [gameState, dispatch] = useReducer(gameStateReducer, initialGameState);
 
+  // if gameState changed save to localStorage
   useEffect(() => {
     localStorage.setItem("sudoku_game_state", JSON.stringify(gameState));
   }, [gameState]);

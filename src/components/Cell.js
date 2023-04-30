@@ -1,5 +1,5 @@
 import styles from "./modules/Cell.module.css";
-import { BASE_CELL_DIAMETER, BASE_GAP, BASE_FONT_SIZE, CELL_STATUS, BASE_GAME_BOARD_DIAMETER, BASE_DRAFT_FONT_SIZE } from "../CONSTS";
+import { BASE_CELL_DIAMETER, BASE_GAP, BASE_FONT_SIZE, CELL_STATUS, BASE_DRAFT_FONT_SIZE } from "../CONSTS";
 
 function Cell({
   rowIdx,
@@ -28,6 +28,8 @@ function Cell({
       onClick={() => setSelectedCell({ rowIdx, colIdx })}
     >
       {value}
+
+      {/* draft numbers */}
       {Array.from({ length: 9 }, (__, idx) => {
         if (draftNumbers.includes(idx + 1)) {
           return (
@@ -58,6 +60,7 @@ const computedStyles = {
     showErrors,
     selectedNumber
   ) {
+    // calculate size and position based on window size
     const width = `${BASE_CELL_DIAMETER * scaleFactor}px`;
     const height = `${BASE_CELL_DIAMETER * scaleFactor}px`;
     const top = `${
@@ -72,6 +75,8 @@ const computedStyles = {
     }px`;
     const borderWidth = `${BASE_GAP * scaleFactor}px`;
     const fontSize = `${BASE_FONT_SIZE * scaleFactor}px`;
+
+    // calculate anmation delay based on the position of the cell
     const animationDelay = `${0.08 * rowIdx + 0.08 * colIdx}s`;
 
     let style = {
@@ -84,6 +89,7 @@ const computedStyles = {
       animationDelay,
     };
 
+    // style the text if is a given number
     if (cellStatus === CELL_STATUS.GIVEN) {
       style.fontWeight = 700;
       style.color = "black";
@@ -91,15 +97,19 @@ const computedStyles = {
       style.color = "red";
     }
 
+    // set border width based on position
     if (rowIdx === 2 || rowIdx === 5)
       style.borderBottomWidth = `${BASE_GAP * 2 * scaleFactor}px`;
     if (colIdx === 2 || colIdx === 5)
       style.borderRightWidth = `${BASE_GAP * 2 * scaleFactor}px`;
+
+    // style selected cell
     if (
       (rowIdx === selectedCell.rowIdx && colIdx === selectedCell.colIdx) ||
       selectedNumber
     ) {
-      style.backgroundColor = "#5ad891";
+      style.backgroundColor = "#2fcc71ff";
+    // style cell on the same row and column of the secected cess
     } else if (
       rowIdx === selectedCell.rowIdx ||
       colIdx === selectedCell.colIdx
@@ -109,11 +119,8 @@ const computedStyles = {
 
     return style;
   },
-  gameBoard: (scaleFactor) => ({
-    width: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
-    height: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
-  }),
   draft: (idx, scaleFactor) => ({
+    // set position and size of draft numbers
     left: `${33 * (idx % 3)}%`,
     top: `${33 * Math.floor(idx / 3)}%`,
     fontSize: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,

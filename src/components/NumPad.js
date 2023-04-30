@@ -60,6 +60,8 @@ function NumPad({
   );
 }
 
+
+// style base on the window dimensions
 const computedStyles = {
   keyPad: (scaleFactor) => ({
     gap: `${BASE_PADDING * scaleFactor}px`,

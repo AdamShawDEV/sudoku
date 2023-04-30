@@ -11,15 +11,17 @@ import { gameWon } from "./hooks/gameState/actions";
 function App() {
   const { gameState, dispatch } = useGameState();
 
+  // check for winnind state
   useEffect(() => {
     if (
       gameState.gameBoard !== null &&
       gameState.gameStatus === GAME_STATUS.PLAYING &&
       checkBoard(gameState.gameBoard, gameState.completedBoard)
     ) {
-      console.log("hi");
       dispatch(gameWon());
     }
+
+    // eslint-disable-next-line
   }, [gameState.gameBoard]);
 
   return (
