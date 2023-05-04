@@ -55,7 +55,7 @@ function changeSettings(newSettings) {
 function undo() {
   return {
     type: types.UNDO,
-  }
+  };
 }
 
 export {

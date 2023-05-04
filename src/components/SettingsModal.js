@@ -6,15 +6,18 @@ import ButtonBox from "./ButtonBox";
 import { useGameState } from "../hooks/gameState/gameStateContext";
 import { useState } from "react";
 import { changeSettings } from "../hooks/gameState/actions";
+import useTheme from "../hooks/theme/useTheme";
 
 function SettingsModal({ handleClose }) {
   const { gameState, dispatch } = useGameState();
   const [showErrors, setShowErrors] = useState(gameState.settings.showErrors);
+  const { availableThemes, currentThemeName } = useTheme();
+  const [theme, setTheme] = useState(currentThemeName);
 
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    dispatch(changeSettings({ showErrors }));
+    dispatch(changeSettings({ showErrors, theme }));
     handleClose();
   }
 
@@ -30,6 +33,20 @@ function SettingsModal({ handleClose }) {
             checked={showErrors}
             onChange={(e) => setShowErrors(e.target.checked)}
           />
+        </div>
+        <div className={style.checkBoxContainer}>
+          <lable htmlFor="theme">change theme</lable>
+          <select
+            id="theme"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+          >
+            {availableThemes.map((themeName) => (
+              <option key={themeName} value={themeName}>
+                {themeName}
+              </option>
+            ))}
+          </select>
         </div>
         <ButtonBox style={{ flexDirection: "row" }}>
           <Button onClick={handleClose}>cancel</Button>

@@ -10,6 +10,7 @@ const initialState = {
   moves: [],
   settings: {
     showErrors: true,
+    theme: "light",
   },
   stats: {
     gamesPlayed: 0,
