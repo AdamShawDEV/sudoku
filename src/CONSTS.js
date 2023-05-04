@@ -23,18 +23,7 @@ export const emptyCell = {
   draftNumbers: [],
 };
 
-export const themes = {
-  dark: {
-    menu: {
-      backgroundColor: "#282c34",
-    },
-  },
-  light: {
-    menu: {
-      backgroundColor: "#979797ff",
-    },
-  },
-};
+export const themes = ["dark", "light"];
 
 export const HEADER_HEIGHT = 40;
 

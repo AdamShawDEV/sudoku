@@ -11,8 +11,8 @@ import useTheme from "../hooks/theme/useTheme";
 function SettingsModal({ handleClose }) {
   const { gameState, dispatch } = useGameState();
   const [showErrors, setShowErrors] = useState(gameState.settings.showErrors);
-  const { availableThemes, currentThemeName } = useTheme();
-  const [theme, setTheme] = useState(currentThemeName);
+  const { availableThemes, currentTheme } = useTheme();
+  const [theme, setTheme] = useState(currentTheme);
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -35,7 +35,7 @@ function SettingsModal({ handleClose }) {
           />
         </div>
         <div className={style.checkBoxContainer}>
-          <lable htmlFor="theme">change theme</lable>
+          <label htmlFor="theme">change theme</label>
           <select
             id="theme"
             value={theme}

@@ -5,9 +5,8 @@ function useTheme() {
   const { gameState } = useGameState();
 
   return {
-    currentTheme: themes[gameState.settings.theme],
-    availableThemes: Object.keys(themes),
-    currentThemeName: gameState.settings.theme,
+    currentTheme: gameState.settings.theme,
+    availableThemes: themes,
   };
 }
 

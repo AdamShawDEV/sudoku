@@ -1,5 +1,12 @@
 import styles from "./modules/Cell.module.css";
-import { BASE_CELL_DIAMETER, BASE_GAP, BASE_FONT_SIZE, CELL_STATUS, BASE_DRAFT_FONT_SIZE } from "../CONSTS";
+import {
+  BASE_CELL_DIAMETER,
+  BASE_GAP,
+  BASE_FONT_SIZE,
+  CELL_STATUS,
+  BASE_DRAFT_FONT_SIZE,
+} from "../CONSTS";
+import useTheme from "../hooks/theme/useTheme";
 
 function Cell({
   rowIdx,
@@ -13,9 +20,11 @@ function Cell({
   setSelectedCell,
   selectedNumberButton,
 }) {
+  const { currentTheme } = useTheme();
+
   return (
     <div
-      className={styles.cell}
+      className={styles["cell-" + currentTheme]}
       style={computedStyles.cell(
         rowIdx,
         colIdx,
@@ -23,7 +32,8 @@ function Cell({
         scaleFactor,
         cellStatus,
         showErrors,
-        selectedNumberButton && selectedNumberButton === value
+        selectedNumberButton && selectedNumberButton === value,
+        currentTheme
       )}
       onClick={() => setSelectedCell({ rowIdx, colIdx })}
     >
@@ -35,7 +45,7 @@ function Cell({
           return (
             <div
               key={idx}
-              className={styles.draftNumber}
+              className={styles["draftNumber-" + currentTheme]}
               style={computedStyles.draft(idx, scaleFactor)}
             >
               {idx + 1}
@@ -58,7 +68,8 @@ const computedStyles = {
     scaleFactor,
     cellStatus,
     showErrors,
-    selectedNumber
+    selectedNumber,
+    currentTheme
   ) {
     // calculate size and position based on window size
     const width = `${BASE_CELL_DIAMETER * scaleFactor}px`;
@@ -92,7 +103,7 @@ const computedStyles = {
     // style the text if is a given number
     if (cellStatus === CELL_STATUS.GIVEN) {
       style.fontWeight = 700;
-      style.color = "black";
+      style.color = currentTheme === "light" ? "black" : "#F2F2F2";
     } else if (cellStatus === CELL_STATUS.WRONG_GUESS && showErrors) {
       style.color = "red";
     }
@@ -108,13 +119,14 @@ const computedStyles = {
       (rowIdx === selectedCell.rowIdx && colIdx === selectedCell.colIdx) ||
       selectedNumber
     ) {
-      style.backgroundColor = "#2fcc71ff";
-    // style cell on the same row and column of the secected cess
+      style.backgroundColor =
+        currentTheme === "light" ? "#2fcc71ff" : "#54936E";
+      // style cell on the same row and column of the secected cess
     } else if (
       rowIdx === selectedCell.rowIdx ||
       colIdx === selectedCell.colIdx
     ) {
-      style.backgroundColor = "#d6f5e3";
+      style.backgroundColor = currentTheme === "light" ? "#d6f5e3" : "#467559";
     }
 
     return style;

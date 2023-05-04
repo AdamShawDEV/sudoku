@@ -1,16 +1,39 @@
-.menuButton {
+.menuButton-light {
   min-width: 15rem;
   padding: 0.8rem;
   margin-bottom: 0.4rem;
   border-radius: 2rem;
-  border: 1px solid #fff;
-  background-color: #282c34;
-  color: #fff;
+  background-color: #F2F2F2;
+  color: #282c34;
+  border: 1px solid #282c34;
 }
 
-.menuButton:hover {
+.menuButton-light:hover {
+  color: #fff;
+  background-color: #282c34;
+}
+
+.menuButton-light:active {
+  filter: brightness(160%);
+}
+
+.menuButton-dark {
+  min-width: 15rem;
+  padding: 0.8rem;
+  margin-bottom: 0.4rem;
+  border-radius: 2rem;
+  background-color: #282c34;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.menuButton-dark:hover {
   color: #282c34;
   background-color: #fff;
+}
+
+.menuButton-dark:active {
+  filter: brightness(60%);
 }
 
 .heroButton {
@@ -28,7 +51,6 @@
   background-color: rgba(0, 0, 0, 0);
 }
 
-.menuButton:active,
 .heroButton:active {
   filter: brightness(60%);
 }

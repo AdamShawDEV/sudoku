@@ -23,7 +23,7 @@ function Menu() {
   }
 
   return (
-    <div className={styles.menuContainer} style={currentTheme.menu}>
+    <div className={styles["menuContainer-" + currentTheme]}>
       <img
         src={`${process.env.PUBLIC_URL}/logo.png`}
         alt="logo"

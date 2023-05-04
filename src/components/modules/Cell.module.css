@@ -1,10 +1,9 @@
-.cell {
+.cell-light {
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
   font-weight: 600;
-  color: #979797ff;
   position: absolute;
   border-color: black;
   border-style: solid;
@@ -13,14 +12,38 @@
   animation-fill-mode: both;
 }
 
-.cell:hover {
+.cell-dark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  font-weight: 600;
+  position: absolute;
+  border-color: #646464;
+  border-style: solid;
+  background-color: #373737;
+  animation: zoomIn 0.3s linear;
+  animation-fill-mode: both;
+}
+
+.cell-light:hover {
   background-color: #2fcc71ff !important;
 }
 
-.draftNumber {
+.draftNumber-light {
   position: absolute;
   text-align: center;
   color: black;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 30%;
+}
+
+.draftNumber-dark {
+  position: absolute;
+  text-align: center;
+  color: #fff;
   top: 0;
   left: 0;
   width: 30%;

@@ -13,6 +13,7 @@ import {
 } from "../CONSTS";
 import GameWonModal from "./GameWonModal";
 import { resetGame } from "../hooks/gameState/actions";
+import useTheme from "../hooks/theme/useTheme";
 
 const emptySelection = { rowIdx: null, colIdx: null };
 
@@ -22,6 +23,7 @@ function PlayField() {
   const [selectedNumberButton, setSelectedNumberButton] = useState(null);
   const { windowDimentions } = useWindowDimensions();
   const { dispatch, gameState } = useGameState();
+  const { currentTheme } = useTheme();
 
   function handleNumKeyPress(value) {
     // cell selected
@@ -66,7 +68,7 @@ function PlayField() {
 
   return (
     <>
-      <div className={styles.playField}>
+      <div className={styles["playField-" + currentTheme]}>
         <GameBoard
           selectedNumberButton={selectedNumberButton}
           setSelectedCell={selectCell}
