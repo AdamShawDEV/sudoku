@@ -1,49 +1,47 @@
-.cell-light {
+.cell {
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
   font-weight: 600;
   position: absolute;
-  border-color: black;
+  border-color: var(--gameBoardBorder);
   border-style: solid;
-  background-color: #f6f6f6ff;
+  background-color: var(--gameBoardBackground);
   animation: zoomIn 0.3s linear;
   animation-fill-mode: both;
+  color: var(--gameBoardCorrectGuess);
 }
 
-.cell-dark {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  font-weight: 600;
-  position: absolute;
-  border-color: #646464;
-  border-style: solid;
-  background-color: #373737;
-  animation: zoomIn 0.3s linear;
-  animation-fill-mode: both;
+.gameBoardSelectedCellBackground {
+  background-color: var(--gameBoardSelectedCellBackground);
 }
 
-.cell-light:hover {
+.gameBoardSelectedRowColBackground {
+  background-color: var(--gameBoardSelectedRowColBackground);
+}
+
+.gameBoardGivenNumberColor {
+  color: var(--gameBoardGivenNumberColor);
+}
+
+.gameBoardWrongNumberColor {
+  color: var(--gameBoardWrongNumberColor);
+}
+
+.cell:hover {
   background-color: #2fcc71ff !important;
 }
 
-.draftNumber-light {
-  position: absolute;
-  text-align: center;
-  color: black;
-  top: 0;
-  left: 0;
-  width: 30%;
-  height: 30%;
+.gameBoardGivenNumber {
+  font-weight: 700;
+  color: #000;
 }
 
-.draftNumber-dark {
+.draftNumber {
   position: absolute;
   text-align: center;
-  color: #fff;
+  color: var(--draftNumberColor);
   top: 0;
   left: 0;
   width: 30%;

@@ -1,39 +1,20 @@
-.menuButton-light {
+.menuButton {
   min-width: 15rem;
   padding: 0.8rem;
   margin-bottom: 0.4rem;
   border-radius: 2rem;
-  background-color: #F2F2F2;
-  color: #282c34;
-  border: 1px solid #282c34;
+  background-color: var(--menuButtonBackground);
+  color: var(--menuButtonTextColor);
+  border: 1px solid var(--menuButtonBorderColor);
 }
 
-.menuButton-light:hover {
-  color: #fff;
-  background-color: #282c34;
+.menuButton:hover {
+  color: var(--menuButtonHoverTextColor);
+  background-color: var(--menuButtonHoverBackground);
 }
 
-.menuButton-light:active {
+.menuButton:active {
   filter: brightness(160%);
-}
-
-.menuButton-dark {
-  min-width: 15rem;
-  padding: 0.8rem;
-  margin-bottom: 0.4rem;
-  border-radius: 2rem;
-  background-color: #282c34;
-  color: #fff;
-  border: 1px solid #fff;
-}
-
-.menuButton-dark:hover {
-  color: #282c34;
-  background-color: #fff;
-}
-
-.menuButton-dark:active {
-  filter: brightness(60%);
 }
 
 .heroButton {
@@ -41,14 +22,14 @@
   padding: 0.8rem;
   margin-bottom: 0.4rem;
   border-radius: 2rem;
-  border: 1px solid #2ecc71ff;
-  background-color: #2ecc71ff;
-  color: #282c34;
+  border: 1px solid var(--heroButtonBorderColor);
+  background-color: var(--heroButtonBackground);
+  color: var(--heroButtonTextColor);
 }
 
 .heroButton:hover {
-  color: #2ecc71ff;
-  background-color: rgba(0, 0, 0, 0);
+  color: var(--heroButtonHoverTextColor);
+  background-color: var(--heroButtonHoverBackground);
 }
 
 .heroButton:active {

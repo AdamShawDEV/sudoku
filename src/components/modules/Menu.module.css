@@ -1,30 +1,14 @@
-.menuContainer-light {
+.menuContainer {
   height: 100%;
   display: flex;
   gap: 5px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #282c34;
-  background-color: #F2F2F2;
-}
-
-.menuContainer-dark {
-  height: 100%;
-  display: flex;
-  gap: 5px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  background-color: #282c34;
-}
-
-.heading {
-  color: #fff;
+  background-color: var(--menuBackground);
 }
 
 .subHeading {
   margin: 0;
-  color: #cacaca;
+  color: var(--subHeadingTextColor);
 }

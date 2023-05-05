@@ -4,10 +4,8 @@ import { startGame, changeStatus } from "../hooks/gameState/actions";
 import { createNewGame } from "../gameLogic";
 import { DIFFICULTY, GAME_STATUS } from "../CONSTS";
 import MenuButton from "./MenuButton";
-import useTheme from "../hooks/theme/useTheme";
 
 function Menu() {
-  const { currentTheme } = useTheme();
   const { dispatch, gameState } = useGameState();
 
   function handleStartNewGame(e) {
@@ -23,7 +21,7 @@ function Menu() {
   }
 
   return (
-    <div className={styles["menuContainer-" + currentTheme]}>
+    <div className={styles.menuContainer}>
       <img
         src={`${process.env.PUBLIC_URL}/logo.png`}
         alt="logo"
@@ -44,7 +42,6 @@ function Menu() {
         className={styles.menuButton}
         onClick={(e) => handleStartNewGame(e)}
       >
-        {" "}
         easy
       </MenuButton>
       <MenuButton

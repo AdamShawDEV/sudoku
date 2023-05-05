@@ -2,16 +2,14 @@ import { useState } from "react";
 import styles from "./modules/Header.module.css";
 import { AiOutlineSetting, AiTwotoneSetting } from "react-icons/ai";
 import SettingsModal from "./SettingsModal";
-import useTheme from "../hooks/theme/useTheme";
 
 function Header() {
-  const { currentTheme } = useTheme();
   const [settingHover, setSettingHover] = useState(false);
   const [settingModalOpen, setSettingModalOpen] = useState(false);
 
   return (
     <>
-      <header className={styles["header-" + currentTheme]}>
+      <header className={styles.header}>
         <span>Sudoku</span>
         <div
           onMouseEnter={() => setSettingHover(true)}

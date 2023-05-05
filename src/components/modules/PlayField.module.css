@@ -1,15 +1,7 @@
-.playField-light {
+.playField {
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  background-color: #cacacaff;
-}
-
-.playField-dark {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  background-color: #373737;
+  background-color: var(--playFieldBackground);
 }

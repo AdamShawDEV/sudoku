@@ -1,20 +1,9 @@
-.header-light {
+.header {
   display: flex;
   height: 30px;
   justify-content: space-between;
-  background-color: #979797ff;
-  font-size: 30px;
-  line-height: 30px;
-  padding: 5px;
-  font-weight: 700;
-}
-
-.header-dark {
-  display: flex;
-  height: 30px;
-  color: #CACACA;
-  justify-content: space-between;
-  background-color: #000;
+  background-color: var(--headerBackground);
+  color: var(--headerForeground);
   font-size: 30px;
   line-height: 30px;
   padding: 5px;
