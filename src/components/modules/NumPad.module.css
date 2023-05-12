@@ -17,6 +17,7 @@
 .button,
 .numKey, .buttonDisabled {
   user-select: none;
+  background: none;
   color: #39cc7fff;
   border: 2px solid #f3f3f3ff;
 }

@@ -1,5 +1,7 @@
 .cell {
   display: flex;
+  padding: 0;
+  box-sizing: content-box;
   justify-content: center;
   align-items: center;
   user-select: none;

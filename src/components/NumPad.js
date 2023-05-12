@@ -18,7 +18,7 @@ function NumPad({
   setIsDraft,
   selectedNumberButton,
 }) {
-  const {gameState, dispatch} = useGameState();
+  const { gameState, dispatch } = useGameState();
 
   return (
     <div className={styles.keyPad} style={computedStyles.keyPad(scaleFactor)}>
@@ -27,7 +27,9 @@ function NumPad({
         style={computedStyles.buttonRow(scaleFactor)}
       >
         <div
-          className={`${!gameState.moves.length ? styles.buttonDisabled : styles.button}`}
+          className={`${
+            !gameState.moves.length ? styles.buttonDisabled : styles.button
+          }`}
           style={computedStyles.button(scaleFactor)}
           onClick={() => dispatch(undo())}
         >
@@ -44,7 +46,7 @@ function NumPad({
       </div>
       <div className={styles.keyRow}>
         {Array.from({ length: 9 }, (__, idx) => (
-          <div
+          <button
             key={idx}
             className={`${styles.numKey} ${
               selectedNumberButton === idx + 1 ? styles.buttonSelected : {}
@@ -53,13 +55,12 @@ function NumPad({
             onClick={() => handleNumKeyPress(idx + 1)}
           >
             <span>{idx + 1}</span>
-          </div>
+          </button>
         ))}
       </div>
     </div>
   );
 }
-
 
 // style base on the window dimensions
 const computedStyles = {
