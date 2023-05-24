@@ -15,7 +15,7 @@ function App() {
   const { gameState, dispatch } = useGameState();
   const { currentTheme } = useTheme();
 
-  // check for winnind state
+  // check for winning state
   useEffect(() => {
     if (
       gameState.gameBoard !== null &&
