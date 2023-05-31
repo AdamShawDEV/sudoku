@@ -63,7 +63,6 @@ export default Cell;
 
 const computedStyles = {
   cell(rowIdx, colIdx, scaleFactor) {
-    console.log(BASE_CELL_DIAMETER * scaleFactor);
     // calculate size and position based on window size
     let style = {
       width: `${BASE_CELL_DIAMETER * scaleFactor}px`,
