@@ -1,21 +1,28 @@
+import { useState } from "react";
 import styles from "./modules/Header.module.css";
-import { useGameState } from "../hooks/gameState/gameStateContext";
-import { loadState } from "../hooks/gameState/actions";
-import { createNewGame } from "../gameLogic";
+import { AiOutlineSetting, AiTwotoneSetting } from "react-icons/ai";
+import SettingsModal from "./SettingsModal";
 
 function Header() {
-  const { dispatch } = useGameState();
-
-  function handleNewGameButtonClick() {
-    const gameBoard = createNewGame();
-    dispatch(loadState(gameBoard));
-  }
+  const [settingHover, setSettingHover] = useState(false);
+  const [settingModalOpen, setSettingModalOpen] = useState(false);
 
   return (
-    <header className={styles.header}>
-      <span>sudocu</span>
-      <button onClick={handleNewGameButtonClick}>new game</button>
-    </header>
+    <>
+      <header className={styles.header}>
+        <span>Sudoku</span>
+        <div
+          onMouseEnter={() => setSettingHover(true)}
+          onMouseLeave={() => setSettingHover(false)}
+          onClick={() => setSettingModalOpen(true)}
+        >
+          {settingHover ? <AiTwotoneSetting /> : <AiOutlineSetting />}
+        </div>
+      </header>
+      {settingModalOpen && (
+        <SettingsModal handleClose={() => setSettingModalOpen(false)} />
+      )}
+    </>
   );
 }
 

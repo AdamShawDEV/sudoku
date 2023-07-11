@@ -1,0 +1,37 @@
+.menuButton {
+  min-width: 15rem;
+  padding: 0.8rem;
+  margin-bottom: 0.4rem;
+  border-radius: 2rem;
+  background-color: var(--menuButtonBackground);
+  color: var(--menuButtonTextColor);
+  border: 1px solid var(--menuButtonBorderColor);
+}
+
+.menuButton:hover {
+  color: var(--menuButtonHoverTextColor);
+  background-color: var(--menuButtonHoverBackground);
+}
+
+.menuButton:active {
+  filter: brightness(160%);
+}
+
+.heroButton {
+  min-width: 15rem;
+  padding: 0.8rem;
+  margin-bottom: 0.4rem;
+  border-radius: 2rem;
+  border: 1px solid var(--heroButtonBorderColor);
+  background-color: var(--heroButtonBackground);
+  color: var(--heroButtonTextColor);
+}
+
+.heroButton:hover {
+  color: var(--heroButtonHoverTextColor);
+  background-color: var(--heroButtonHoverBackground);
+}
+
+.heroButton:active {
+  filter: brightness(60%);
+}

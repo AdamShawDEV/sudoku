@@ -1,50 +1,46 @@
-import { useState } from "react";
 import "./App.css";
-import GameBoard from "./components/GameBoard";
-import NumPad from "./components/NumPad";
-import { addNumber } from "./hooks/gameState/actions";
 import { useGameState } from "./hooks/gameState/gameStateContext";
 import Header from "./components/Header";
 import { GAME_STATUS } from "./CONSTS";
-
-const emptySelection = { rowIdx: null, colIdx: null };
+import Menu from "./components/Menu";
+import PlayField from "./components/PlayField";
+import { useEffect } from "react";
+import { checkBoard } from "./gameLogic";
+import { gameWon } from "./hooks/gameState/actions";
+import Themer from "./components/Themer";
+import useTheme from "./hooks/theme/useTheme";
+import { themeColors } from "./CONSTS";
 
 function App() {
-  const [selectedCell, setSelectedCell] = useState(emptySelection);
-  const { dispatch, gameState } = useGameState();
+  const { gameState, dispatch } = useGameState();
+  const { currentTheme } = useTheme();
 
-  function handleNumKeyPress(value) {
-    if (selectedCell.rowIdx != null && selectedCell.colIdx != null) {
-      dispatch(addNumber(value, selectedCell.rowIdx, selectedCell.colIdx));
+  // check for winning state
+  useEffect(() => {
+    if (
+      gameState.gameBoard !== null &&
+      gameState.gameStatus === GAME_STATUS.PLAYING &&
+      checkBoard(gameState.gameBoard, gameState.completedBoard)
+    ) {
+      dispatch(gameWon());
     }
-  }
 
-  function selectCell(cell) {
-    setSelectedCell((curr) => {
-      if (curr.rowIdx === cell.rowIdx && curr.colIdx === cell.colIdx)
-        return emptySelection;
-
-      return cell;
-    });
-  }
+    // eslint-disable-next-line
+  }, [gameState.gameBoard]);
 
   return (
-    <div className="App">
-      <Header />
-      <main>
-        {gameState.gameStatus === GAME_STATUS.PLAYING ? (
-          <>
-            <GameBoard
-              setSelectedCell={selectCell}
-              selectedCell={selectedCell}
-            />
-            <NumPad handleNumKeyPress={handleNumKeyPress} />
-          </>
-        ) : (
-          <div>hiya</div>
-        )}
-      </main>
-    </div>
+    <Themer variables={themeColors[currentTheme]}>
+      {gameState.gameStatus === GAME_STATUS.INITIAL ? (
+        <Menu />
+      ) : (
+        <>
+          <Header />
+          <main>
+            <PlayField />
+          </main>
+        </>
+      )}
+    </Themer>
   );
 }
 

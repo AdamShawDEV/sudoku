@@ -9,11 +9,62 @@ function addNumber(value, rowIdx, colIdx) {
   };
 }
 
-function loadState(gameBoard) {
+function startGame(gameBoard, completedBoard, difficulty) {
   return {
-    type: types.LOAD_STATE,
+    type: types.START_GAME,
     gameBoard,
+    completedBoard,
+    difficulty,
   };
 }
 
-export { addNumber, loadState };
+function changeStatus(newStatus) {
+  return {
+    type: types.CHANGE_STATUS,
+    newStatus,
+  };
+}
+
+function addDraft(value, rowIdx, colIdx) {
+  return {
+    type: types.ADD_DRAFT,
+    value,
+    rowIdx,
+    colIdx,
+  };
+}
+
+function resetGame() {
+  return {
+    type: types.RESET_GAME,
+  };
+}
+function gameWon() {
+  return {
+    type: types.GAME_WON,
+  };
+}
+
+function changeSettings(newSettings) {
+  return {
+    type: types.CHANGE_SETTINGS,
+    newSettings,
+  };
+}
+
+function undo() {
+  return {
+    type: types.UNDO,
+  };
+}
+
+export {
+  addNumber,
+  startGame,
+  changeStatus,
+  addDraft,
+  resetGame,
+  gameWon,
+  changeSettings,
+  undo,
+};

@@ -1,19 +1,51 @@
-.numPad {
+.keyPad {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.buttonRow {
   display: flex;
   justify-content: center;
-  gap: 5px;
+}
+
+.keyRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button,
+.numKey, .buttonDisabled {
+  user-select: none;
+  background: none;
+  color: #39cc7fff;
+  border: 2px solid #f3f3f3ff;
+}
+
+.button:hover,
+.numKey:hover {
+  border-color: #13c45fff;
+}
+
+.button:active,
+.numKey:active {
+  background-color: #13c45fff;
+  color: #f3f3f3ff;
+}
+
+.buttonSelected {
+  border-color: #13c45fff;
+  background-color: #13c45fff;
+  color: #f3f3f3ff;
+}
+
+.buttonDisabled {
+  color: #f3f3f3ff;
 }
 
 .numKey {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 40px;
-  background-color: blue;
-  border-radius: 5px;
-}
-
-.numKey:hover {
-  background-color: aqua;
+  font-weight: 700;
 }

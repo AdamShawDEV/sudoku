@@ -1,45 +1,36 @@
 import styles from "./modules/GameBoard.module.css";
 import { useGameState } from "../hooks/gameState/gameStateContext";
+import { BASE_GAME_BOARD_DIAMETER } from "../CONSTS";
+import Cell from "./Cell";
 
-const computedStyles = {
-  cell(rowIdx, colIdx, selectedCell) {
-    let style = {
-      top: `${rowIdx * 31 + 1 * Math.floor(rowIdx / 3)}px`,
-      left: `${colIdx * 31 + 1 * Math.floor(colIdx / 3)}px`,
-    };
-
-    if (rowIdx === 2 || rowIdx === 5) style.borderBottom = "2px solid black";
-    if (colIdx === 2 || colIdx === 5) style.borderRight = "2px solid black";
-    if (rowIdx === selectedCell.rowIdx && colIdx === selectedCell.colIdx) {
-      style.backgroundColor = "orange";
-    } else if (
-      rowIdx === selectedCell.rowIdx ||
-      colIdx === selectedCell.colIdx
-    ) {
-      style.backgroundColor = "white";
-    }
-
-    return style;
-  },
-};
-
-function GameBoard({ selectedCell, setSelectedCell }) {
+function GameBoard({
+  selectedCell,
+  setSelectedCell,
+  selectedNumberButton,
+  scaleFactor,
+}) {
   const { gameState } = useGameState();
 
-  if (!gameState.gameBoard) return null;
-
   return (
-    <div className={styles.gameBoard}>
+    <div
+      className={styles.gameBoard}
+      style={computedStyles.gameBoard(scaleFactor)}
+    >
       {gameState.gameBoard.map((row, rowIdx) =>
         row.map((cell, colIdx) => (
-          <div
+          <Cell
             key={`${rowIdx} ${colIdx}`}
-            className={styles.cell}
-            style={computedStyles.cell(rowIdx, colIdx, selectedCell)}
-            onClick={() => setSelectedCell({ rowIdx, colIdx })}
-          >
-            {cell.value}
-          </div>
+            rowIdx={rowIdx}
+            colIdx={colIdx}
+            selectedCell={selectedCell}
+            selectedNumberButton={selectedNumberButton}
+            scaleFactor={scaleFactor}
+            cellStatus={cell.status}
+            showErrors={gameState.settings.showErrors}
+            draftNumbers={cell.draftNumbers}
+            value={cell.value}
+            setSelectedCell={setSelectedCell}
+          />
         ))
       )}
     </div>
@@ -47,3 +38,11 @@ function GameBoard({ selectedCell, setSelectedCell }) {
 }
 
 export default GameBoard;
+
+const computedStyles = {
+  gameBoard: (scaleFactor) => ({
+    // set width and height of the game board base on the window size
+    width: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
+    height: `${BASE_GAME_BOARD_DIAMETER * scaleFactor}px`,
+  }),
+};

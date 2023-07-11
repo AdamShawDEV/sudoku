@@ -1,20 +1,4 @@
 .gameBoard {
   position: relative;
-  background-color: red;
-  width: 281px;
-  height: 281px;
-  border: 0.5px solid black;
   margin: 0 auto;
-}
-
-.cell {
-  position: absolute;
-  font-size: 20px;
-  width: 30px;
-  height: 30px;
-  border: 1px solid black;
-}
-
-.cell:hover {
-  background-color: aqua;
 }
