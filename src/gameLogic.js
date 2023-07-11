@@ -10,7 +10,7 @@ const emptyCell = {
 function createEmptyBoard() {
   const initailGameBoard = Array(9)
     .fill(0)
-    .map((i) => Array(9).fill(null));
+    .map((_) => Array(9).fill(null));
 
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
