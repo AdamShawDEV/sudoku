@@ -47,7 +47,11 @@ function Cell({
             <div
               key={idx}
               className={styles.draftNumber}
-              style={computedStyles.draft(idx, scaleFactor)}
+              style={computedStyles.draft(
+                idx,
+                scaleFactor,
+                !selectedNumberButton || selectedNumberButton === idx + 1
+              )}
             >
               {idx + 1}
             </div>
@@ -92,11 +96,17 @@ const computedStyles = {
 
     return style;
   },
-  draft: (idx, scaleFactor) => ({
+  draft: (idx, scaleFactor, isHighlighted) => {
     // set position and size of draft numbers
-    left: `${33 * (idx % 3)}%`,
-    top: `${33 * Math.floor(idx / 3)}%`,
-    fontSize: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
-    lineHeight: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
-  }),
+    let styles = {
+      left: `${33 * (idx % 3)}%`,
+      top: `${33 * Math.floor(idx / 3)}%`,
+      fontSize: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
+      lineHeight: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
+    };
+
+    if (!isHighlighted) styles.color = "#cacaca";
+
+    return styles;
+  },
 };

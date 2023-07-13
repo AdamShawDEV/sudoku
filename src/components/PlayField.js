@@ -42,7 +42,7 @@ function PlayField() {
 
   function selectCell(cell) {
     if (selectedNumberButton) {
-      // if number selected add number to cell base on if draft mode is enabled
+      // if number selected add number to cell based on if draft mode is enabled
       isDraft
         ? dispatch(addDraft(selectedNumberButton, cell.rowIdx, cell.colIdx))
         : dispatch(addNumber(selectedNumberButton, cell.rowIdx, cell.colIdx));
