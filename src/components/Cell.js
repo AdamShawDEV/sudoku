@@ -96,17 +96,14 @@ const computedStyles = {
 
     return style;
   },
-  draft: (idx, scaleFactor, isHighlighted) => {
+  draft: (idx, scaleFactor, isHighlighted) => ({
     // set position and size of draft numbers
-    let styles = {
-      left: `${33 * (idx % 3)}%`,
-      top: `${33 * Math.floor(idx / 3)}%`,
-      fontSize: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
-      lineHeight: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
-    };
-
-    if (!isHighlighted) styles.color = "#cacaca";
-
-    return styles;
-  },
+    left: `${33 * (idx % 3)}%`,
+    top: `${33 * Math.floor(idx / 3)}%`,
+    fontSize: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
+    lineHeight: `${BASE_DRAFT_FONT_SIZE * scaleFactor}px`,
+    color: isHighlighted
+      ? "var(--draftNumberHighlightedColor)"
+      : "var(--draftNumbersScondaryColor)",
+  }),
 };

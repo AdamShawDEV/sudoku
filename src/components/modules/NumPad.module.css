@@ -15,32 +15,35 @@
 }
 
 .button,
-.numKey, .buttonDisabled {
+.numKey,
+.buttonDisabled {
   user-select: none;
   background: none;
-  color: #39cc7fff;
-  border: 2px solid #f3f3f3ff;
+  color: var(--numpadKeyColor);
+  border: 2px solid var(--numpadkeyBorderColor);
 }
 
-.button:hover,
+/* .button:hover,
 .numKey:hover {
   border-color: #13c45fff;
-}
+} */
 
 .button:active,
 .numKey:active {
-  background-color: #13c45fff;
-  color: #f3f3f3ff;
+  background-color: var(--numpadkeyActiveBackgroundColor);
+  color: var(--numpadKeyActiveColor);
+  border-color: var(--numpadkeyActiveBorderColor);
 }
 
 .buttonSelected {
-  border-color: #13c45fff;
-  background-color: #13c45fff;
-  color: #f3f3f3ff;
+  border-color: var(--numpadkeySelectedBorderColor);
+  background-color: var(--numpadkeyActiveBorderColor);
+  color: var(--numpadKeySelectedColor);
 }
 
 .buttonDisabled {
-  color: #f3f3f3ff;
+  color: var(--numpadkeyDisabledColor);
+  border-color: var(--numpadkeyDisabledBorderColor);
 }
 
 .numKey {
