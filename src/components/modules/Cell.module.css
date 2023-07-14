@@ -31,19 +31,18 @@
   color: var(--gameBoardWrongNumberColor);
 }
 
-.cell:hover {
+/* .cell:hover {
   background-color: #2fcc71ff !important;
-}
+} */
 
 .gameBoardGivenNumber {
   font-weight: 700;
-  color: #000;
 }
 
 .draftNumber {
   position: absolute;
   text-align: center;
-  color: var(--draftNumberColor);
+  color: var(--numpadKeySelectedColor);
   top: 0;
   left: 0;
   width: 30%;
