@@ -6,6 +6,9 @@ import {
   BASE_KEY_BORDER_RADIUS,
   BASE_KEY_HEIGHT,
   BASE_KEY_WIDTH,
+  BASE_NUMREMAINING_FONT_SIZE,
+  BASE_NUMREMAINING_RIGHT,
+  BASE_NUMREMAINING_TOP,
   BASE_PADDING,
 } from "../CONSTS";
 import { useGameState } from "../hooks/gameState/gameStateContext";
@@ -19,6 +22,8 @@ function NumPad({
   selectedNumberButton,
 }) {
   const { gameState, dispatch } = useGameState();
+
+  const numbersRemaining = getNumbersRemaining(gameState.gameBoard);
 
   return (
     <div className={styles.keyPad} style={computedStyles.keyPad(scaleFactor)}>
@@ -54,6 +59,12 @@ function NumPad({
             style={computedStyles.numKey(scaleFactor)}
             onClick={() => handleNumKeyPress(idx + 1)}
           >
+            <span
+              className={styles.numbersRemaining}
+              style={computedStyles.numbersRemaining(scaleFactor)}
+            >
+              {numbersRemaining[idx + 1]}
+            </span>
             <span>{idx + 1}</span>
           </button>
         ))}
@@ -84,6 +95,37 @@ const computedStyles = {
     fontSize: `${BASE_BUTTON_FONT_SIZE * scaleFactor}px`,
     borderRadius: `${BASE_KEY_BORDER_RADIUS * scaleFactor}px`,
   }),
+  numbersRemaining: (scaleFactor) => ({
+    top: `${BASE_NUMREMAINING_TOP * scaleFactor}px`,
+    right: `${BASE_NUMREMAINING_RIGHT * scaleFactor}px`,
+    fontSize: `${BASE_NUMREMAINING_FONT_SIZE * scaleFactor}px`,
+  }),
 };
+
+// calculate numbers remaining on the game board
+function getNumbersRemaining(gameBoard) {
+  let numbersRemaining = {
+    1: 9,
+    2: 9,
+    3: 9,
+    4: 9,
+    5: 9,
+    6: 9,
+    7: 9,
+    8: 9,
+    9: 9,
+  };
+
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      const value = gameBoard[row][col].value;
+      if (value) {
+        numbersRemaining[value] = numbersRemaining[value] - 1;
+      }
+    }
+  }
+
+  return numbersRemaining;
+}
 
 export default NumPad;

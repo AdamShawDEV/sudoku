@@ -47,8 +47,13 @@
 }
 
 .numKey {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 700;
+}
+
+.numbersRemaining {
+  position: absolute;
 }

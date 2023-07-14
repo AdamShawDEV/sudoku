@@ -114,6 +114,9 @@ export const BASE_KEY_WIDTH = 60;
 export const BASE_KEY_HEIGHT = 80;
 export const BASE_KEY_FONT_SIZE = 40;
 export const BASE_KEY_BORDER_RADIUS = 15;
+export const BASE_NUMREMAINING_TOP = 2;
+export const BASE_NUMREMAINING_RIGHT = 4;
+export const BASE_NUMREMAINING_FONT_SIZE = 16;
 
 export const BASE_DRAFT_FONT_SIZE = 15;
 
