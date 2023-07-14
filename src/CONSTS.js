@@ -83,7 +83,7 @@ export const themeColors = {
     "--gameBoardGivenNumberColor": "#CAC9C9",
     "--gameBoardWrongNumberColor": "red",
     "--gameBoardCorrectGuess": "#979797",
-    "--gameBoardSelectedCellBackground": "#2ECC71",
+    "--gameBoardSelectedCellBackground": "#1a9f53",
     "--gameBoardSelectedRowColBackground": "#467559",
     "--draftNumberHighlightedColor": "#000",
     "--draftNumbersScondaryColor": "#cacaca",
