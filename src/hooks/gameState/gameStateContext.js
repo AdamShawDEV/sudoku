@@ -44,8 +44,10 @@ function GameStateProvider({ children }) {
     localStorage.setItem("sudoku_game_state", JSON.stringify(gameState));
   }, [gameState]);
 
+  const value = { ...gameState, dispatch };
+
   return (
-    <GameStateContext.Provider value={{ gameState, dispatch }}>
+    <GameStateContext.Provider value={value}>
       {children}
     </GameStateContext.Provider>
   );

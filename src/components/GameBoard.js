@@ -9,14 +9,14 @@ function GameBoard({
   selectedNumberButton,
   scaleFactor,
 }) {
-  const { gameState } = useGameState();
+  const { gameBoard, settings } = useGameState();
 
   return (
     <div
       className={styles.gameBoard}
       style={computedStyles.gameBoard(scaleFactor)}
     >
-      {gameState.gameBoard.map((row, rowIdx) =>
+      {gameBoard.map((row, rowIdx) =>
         row.map((cell, colIdx) => (
           <Cell
             key={`${rowIdx} ${colIdx}`}
@@ -26,7 +26,7 @@ function GameBoard({
             selectedNumberButton={selectedNumberButton}
             scaleFactor={scaleFactor}
             cellStatus={cell.status}
-            showErrors={gameState.settings.showErrors}
+            showErrors={settings.showErrors}
             draftNumbers={cell.draftNumbers}
             value={cell.value}
             setSelectedCell={setSelectedCell}

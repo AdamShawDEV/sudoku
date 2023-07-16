@@ -39,11 +39,6 @@ function resetGame() {
     type: types.RESET_GAME,
   };
 }
-function gameWon() {
-  return {
-    type: types.GAME_WON,
-  };
-}
 
 function changeSettings(newSettings) {
   return {
@@ -64,7 +59,6 @@ export {
   changeStatus,
   addDraft,
   resetGame,
-  gameWon,
   changeSettings,
   undo,
 };

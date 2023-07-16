@@ -6,7 +6,7 @@ import { DIFFICULTY, GAME_STATUS } from "../CONSTS";
 import MenuButton from "./MenuButton";
 
 function Menu() {
-  const { dispatch, gameState } = useGameState();
+  const { dispatch, gameBoard } = useGameState();
 
   function handleStartNewGame(e) {
     const difficulty = e.target.id;
@@ -27,7 +27,7 @@ function Menu() {
         alt="logo"
         height="150px"
       />
-      {gameState.gameBoard && (
+      {gameBoard && (
         <MenuButton
           className={styles.menuButton}
           onClick={handleContinue}

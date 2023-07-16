@@ -1,5 +1,6 @@
 import { CELL_STATUS, GAME_STATUS } from "../../CONSTS";
 import * as types from "./actionTypes";
+import { checkBoard } from "../../gameLogic";
 
 export default function gameStateReducer(state, action) {
   const { type } = action;
@@ -52,11 +53,33 @@ export default function gameStateReducer(state, action) {
         })
       );
 
+      // if board is complete eregister a game and set game state tot won
+      const isGameWon = checkBoard(newGameBoard, state.completedBoard);
+      const gameStatus = isGameWon ? GAME_STATUS.WON : state.gameStatus;
+      const stats = isGameWon
+        ? {
+            ...state.stats,
+            gamesWon: state.stats.gamesWon + 1,
+            perfectGames: state.perfectGame
+              ? state.stats.perfectGames + 1
+              : state.stats.perfectGames,
+            currentStreak: state.perfectGame
+              ? state.stats.currentStreak + 1
+              : 0,
+            longestStreak:
+              state.stats.currentStreak + 1 > state.stats.longestStreak
+                ? state.stats.currentStreak + 1
+                : state.stats.longestStreak,
+          }
+        : state.stats;
+
       return {
         ...state,
         moves: [...state.moves, { ...action, backup }],
         gameBoard: newGameBoard,
         perfectGame: state.perfectGame ? isCorrect : state.perfectGame,
+        gameStatus,
+        stats,
       };
     }
     case types.START_GAME:
@@ -124,25 +147,6 @@ export default function gameStateReducer(state, action) {
         perfectGame: true,
         gameStatus: GAME_STATUS.INITIAL,
       };
-    case types.GAME_WON:
-      // register a won game
-      return {
-        ...state,
-        gameStatus: GAME_STATUS.WON,
-        stats: {
-          ...state.stats,
-          gamesWon: state.stats.gamesWon + 1,
-          perfectGames: state.perfectGame
-            ? state.stats.perfectGames + 1
-            : state.stats.perfectGames,
-          currentStreak: state.perfectGame ? state.stats.currentStreak + 1 : 0,
-          longestStreak:
-            state.stats.currentStreak + 1 > state.stats.longestStreak
-              ? state.stats.currentStreak + 1
-              : state.stats.longestStreak,
-        },
-      };
-
     case types.CHANGE_SETTINGS:
       // save setting changed
       return {

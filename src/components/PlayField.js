@@ -21,7 +21,7 @@ function PlayField() {
   const [isDraft, setIsDraft] = useState(false);
   const [selectedNumberButton, setSelectedNumberButton] = useState(null);
   const { windowDimentions } = useWindowDimensions();
-  const { dispatch, gameState } = useGameState();
+  const { dispatch, gameStatus } = useGameState();
 
   function handleNumKeyPress(value) {
     // cell selected
@@ -82,7 +82,7 @@ function PlayField() {
         />
       </div>
       {/* Display game won modal */}
-      {gameState.gameStatus === GAME_STATUS.WON && (
+      {gameStatus === GAME_STATUS.WON && (
         <GameWonModal handleClose={() => dispatch(resetGame())} />
       )}
     </>

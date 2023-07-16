@@ -4,13 +4,13 @@ import { useGameState } from "../hooks/gameState/gameStateContext";
 import Button from "./Button";
 
 function GameWonModal({ handleClose }) {
-  const { gameState } = useGameState();
+  const { perfectGame, stats } = useGameState();
   const { gamesWon, gamesPlayed, perfectGames, currentStreak, longestStreak } =
-    gameState.stats;
+    stats;
 
   return (
     <Modal handleClose={handleClose}>
-      <h1>{gameState.perfectGame ? "Perfect game!" : "You Won!"}</h1>
+      <h1>{perfectGame ? "Perfect game!" : "You Won!"}</h1>
       <h2>Stats:</h2>
       <div className={styles.row}>
         <div>

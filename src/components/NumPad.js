@@ -21,9 +21,9 @@ function NumPad({
   setIsDraft,
   selectedNumberButton,
 }) {
-  const { gameState, dispatch } = useGameState();
+  const { gameBoard, moves, dispatch } = useGameState();
 
-  const numbersRemaining = getNumbersRemaining(gameState.gameBoard);
+  const numbersRemaining = getNumbersRemaining(gameBoard);
 
   return (
     <div className={styles.keyPad} style={computedStyles.keyPad(scaleFactor)}>
@@ -32,9 +32,7 @@ function NumPad({
         style={computedStyles.buttonRow(scaleFactor)}
       >
         <div
-          className={`${
-            !gameState.moves.length ? styles.buttonDisabled : styles.button
-          }`}
+          className={`${!moves.length ? styles.buttonDisabled : styles.button}`}
           style={computedStyles.button(scaleFactor)}
           onClick={() => dispatch(undo())}
         >

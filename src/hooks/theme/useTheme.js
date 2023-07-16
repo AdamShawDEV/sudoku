@@ -2,10 +2,10 @@ import { themes } from "../../CONSTS";
 import { useGameState } from "../gameState/gameStateContext";
 
 function useTheme() {
-  const { gameState } = useGameState();
+  const { settings } = useGameState();
 
   return {
-    currentTheme: gameState.settings.theme,
+    currentTheme: settings.theme,
     availableThemes: themes,
   };
 }
