@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./modules/Header.module.css";
 import { AiOutlineSetting, AiTwotoneSetting } from "react-icons/ai";
 import SettingsModal from "./SettingsModal";
+import Icon from "./Icon";
 
 function Header() {
   const [settingHover, setSettingHover] = useState(false);
@@ -16,7 +17,11 @@ function Header() {
           onMouseLeave={() => setSettingHover(false)}
           onClick={() => setSettingModalOpen(true)}
         >
-          {settingHover ? <AiTwotoneSetting /> : <AiOutlineSetting />}
+          {settingHover ? (
+            <Icon id="settingsFill" />
+          ) : (
+            <Icon id="settingsOutline" />
+          )}
         </div>
       </header>
       {settingModalOpen && (

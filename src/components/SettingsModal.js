@@ -9,8 +9,8 @@ import { changeSettings } from "../hooks/gameState/actions";
 import useTheme from "../hooks/theme/useTheme";
 
 function SettingsModal({ handleClose }) {
-  const { gameState, dispatch } = useGameState();
-  const [showErrors, setShowErrors] = useState(gameState.settings.showErrors);
+  const { settings, dispatch } = useGameState();
+  const [showErrors, setShowErrors] = useState(settings.showErrors);
   const { availableThemes, currentTheme } = useTheme();
   const [theme, setTheme] = useState(currentTheme);
 
