@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import Portal from "./Portal";
-import { RiCloseLine } from "react-icons/ri";
 import styles from "./modules/Modal.module.css";
 import PropTypes from "prop-types";
 import useHandleOutsideClick from "../hooks/useHandleOutsideClick";
@@ -30,7 +29,7 @@ function Modal({ children, handleClose }) {
         <div className={styles.centered}>
           <div className={styles.modal} ref={modalRef}>
             <button onClick={handleClick} className={styles.closeBtn}>
-              <RiCloseLine style={{ marginBottom: "-3px" }} />
+              X
             </button>
             <div className={styles.modalContent}>{children}</div>
           </div>

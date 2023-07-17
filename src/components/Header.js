@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./modules/Header.module.css";
-import { AiOutlineSetting, AiTwotoneSetting } from "react-icons/ai";
 import SettingsModal from "./SettingsModal";
 import Icon from "./Icon";
 
